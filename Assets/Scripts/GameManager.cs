@@ -58,10 +58,20 @@ public class GameManager : MonoBehaviour
     {
         _timer = GameObject.FindObjectOfType<Timer>();
         _score = GameObject.FindObjectOfType<ScoreBoard>();
+        _timer.gameObject.SetActive(false);
         _score.gameObject.SetActive(false);
         _counter = FindObjectOfType<Countdown>();
+        _counter.TimerOverEvent += _counter_TimerOverEvent;
     }
 
+    private void _counter_TimerOverEvent(object sender, EventArgs e)
+    {
+        _timer.StartTimer();
+        foreach (var c in _cars)
+        {
+            c.EnableControls();
+        }
+    }
 
     public BaseCarUnit GetPlayerCar()
     {

@@ -19,19 +19,18 @@ public class Timer : MonoBehaviour
 
     private float _resultTime = 0f;
 
-    private void Start()
-    {
-        StartTimer();
-    }
 
     public void StartTimer()
     {
+        gameObject.SetActive(true);
+        _text = GetComponent<Text>();
         IsActive = true;
         StartCoroutine(TimerCoroutine());
     }
     public float EndTimer()
     {
         StopCoroutine(TimerCoroutine());
+        IsActive = false;
         return _resultTime;
     }
 
